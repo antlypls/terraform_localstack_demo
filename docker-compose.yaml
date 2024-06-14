@@ -1,0 +1,15 @@
+services:
+  localstack:
+    image: localstack/localstack
+    ports:
+      - "4566:4566"
+
+  terraform:
+    build: .
+    depends_on:
+      - localstack
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./terraform:/terraform
+    working_dir: /terraform
